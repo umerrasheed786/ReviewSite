@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
-// import '@ckeditor/ckeditor5-build-classic/build/ckeditor.css';
 
 import ProtectedRoute from "./views/pages/protected/ProtectedRoute";
 const loading = (
@@ -15,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 // Containers
 // const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 const Layout = React.lazy(() => import("./layout/Layout"));
-const Comment = React.lazy(() => import("./views/pages/comment/Comment"));
+const Comment = React.lazy(() => import("./views/pages/comment/Comment.js"));
 
 // import Layout from "./layout/Layout"
 // import Comment from "./views/pages/comment/Comment";
