@@ -14,7 +14,11 @@ import "react-toastify/dist/ReactToastify.css";
 // Containers
 // const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 const Layout = React.lazy(() => import("./layout/Layout"));
+const CommentList = React.lazy(() =>
+  import("./views/pages/comment/CommentList.js")
+);
 const Comment = React.lazy(() => import("./views/pages/comment/Comment.js"));
+const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard.js"));
 
 // import Layout from "./layout/Layout"
 // import Comment from "./views/pages/comment/Comment";
@@ -42,7 +46,19 @@ const App = () => {
         >
           <Route
             exact
-            path="comment"
+            path="dashboard"
+            name="Dashboard"
+            element={<Dashboard />}
+          />
+          <Route
+            exact
+            path="comments"
+            name="comment Page"
+            element={<CommentList />}
+          />
+          <Route
+            exact
+            path="create-comments"
             name="comment Page"
             element={<Comment />}
           />

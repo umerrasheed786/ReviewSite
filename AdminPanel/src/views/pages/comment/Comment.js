@@ -28,8 +28,11 @@ const Comment = () => {
     console.log("validated", validated);
   }, [validated]);
   const handleEditorChange = (event, editor) => {
+    console.log("handleEditorChange", editor.getData());
     const data = editor.getData();
     setContent(data);
+    editorRef.current = data; // Update editorContent variable
+    console.log("editor", editorRef.current);
   };
 
   const handleSubmit = (event) => {
@@ -37,21 +40,23 @@ const Comment = () => {
     event.stopPropagation();
     const form = event.currentTarget;
 
+    var editorContent = editorRef.current;
     if (form.checkValidity() === false) {
-    //   setValidated(true);
-      var editorContent = editorRef.current.editor.getData().trim();
-      console.log("editorConten============", editorContent);
+      console.log(
+        "editorContent1============",
+        editorRef.current.editor.getData()
+      );
       if (editorContent === "") {
         setValidated(true);
         return;
       }
-      return;
     }
-
+    console.log("editorContent2============", editorRef.current);
+    // Move this code outside the if statement
     const commentData = {
       title,
       rating,
-      content: editorContent,
+      content: editorContent, // Use the defined editorContent here
       category,
     };
 
@@ -121,18 +126,17 @@ const Comment = () => {
                             ref={editorRef}
                             editor={ClassicEditor}
                             data=""
-                            // onReady={(editor) => {
-                            //   // You can store the "editor" and use when it is needed.
-                            //   console.log("Editor is ready to use!", editor);
-                            // }}
-                            // onChange={handleEditorChange}
-                            // required
-                            // onBlur={(event, editor) => {
-                            //   console.log("Blur.", editor);
-                            // }}
-                            // onFocus={(event, editor) => {
-                            //   console.log("Focus.", editor);
-                            // }}
+                            onReady={(editor) => {
+                              // You can store the "editor" and use when it is needed.
+                              console.log("Editor is ready to use!", editor);
+                            }}
+                            onChange={handleEditorChange}
+                            onBlur={(event, editor) => {
+                              console.log("Blur.", editor);
+                            }}
+                            onFocus={(event, editor) => {
+                              console.log("Focus.", editor);
+                            }}
                           />
                         </CInputGroup>
                         {validated &&

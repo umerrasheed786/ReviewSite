@@ -12,7 +12,7 @@ var app = express();
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", () => {
   console.log("MongoDB connected successfully.");
-})
+});
 require("./src/strategies/passport-local");
 app.use(logger("dev"));
 app.use(express.json());
@@ -36,9 +36,7 @@ app.use(cors(corsOptions));
 app.use("/uploads", express.static(path.join(__dirname, "/src/uploads")));
 // app.use("/auth", socialRoutes);
 // app.use("/v1/front", frontRoutes);
-app.use('/v1/admin', adminRoutes);
-
-
+app.use("/v1/admin", adminRoutes);
 
 // Serve admin build
 app.use("/admin", express.static(path.join(__dirname, "../admin/build")));
@@ -54,7 +52,6 @@ app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "./build", "index.html"));
 });
 
-
 app.use(handleError);
 
-module.exports = app
+module.exports = app;
